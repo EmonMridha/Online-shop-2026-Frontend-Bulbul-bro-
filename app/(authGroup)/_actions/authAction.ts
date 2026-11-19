@@ -1,13 +1,9 @@
+'use server'
 import { cookies } from "next/headers"
 
 type LoginState = {
     success: boolean,
-    message: string,
-    data: {
-        accessToken: string,
-        refreshToken: string,
-        userRole?: string  // ← Add optional userRole
-    }
+    message: string
 }
 
 export const loginAction = async (prevState: LoginState, formData: FormData) => {
@@ -48,12 +44,11 @@ export const loginAction = async (prevState: LoginState, formData: FormData) => 
                 path: '/'
             })
 
-            const token = result.data.accessToken;
             const userRole = result.data.user.role
 
             // setting the user role in the cookie
-            if (result.data.role) {
-                cookieStore.set('userRole', result.data.userRole, {
+            if (userRole) {
+                cookieStore.set('userRole', userRole, {
                     httpOnly: true,
                     maxAge: 60 * 60 * 24,
                     sameSite: "lax",
@@ -61,26 +56,16 @@ export const loginAction = async (prevState: LoginState, formData: FormData) => 
                 })
             }
 
-            cookieStore.set("userRole", userRole, {
-                httpOnly: true,
-                maxAge: 60 * 60 * 24 * 7,
-                sameSite: "lax",
-                path: "/"
-            })
-
             return {
                 success: true,
-                message: result.message || "Login successful",
-                data: {
-                    accessToken: result.data.accessToken,
-                    refreshToken: result.data.refreshToken,
-                    userRole: userRole
-                }
+                message: result.message || "Login successful"
             }
         }
 
-        return result
-
+        return {
+            success: false,
+            message: result.message || "Invalid email or password broooo"
+        }
     } catch (error) {
         if (error instanceof Error && error.message.includes('NEXT_REDIRECT')) {
             throw error
