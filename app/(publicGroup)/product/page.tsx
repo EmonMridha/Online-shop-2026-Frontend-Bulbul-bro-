@@ -1,9 +1,9 @@
 
 'use client'
 
+import ProductCard from "@/app/(publicGroup)/_components/ProductCard";
 import { getAllProduct } from "@/lib/services/productService"
 import { useEffect, useState } from "react"
-import ProductCard from "./_components/ProductCard";
 
 export interface Product {
   id: string;
