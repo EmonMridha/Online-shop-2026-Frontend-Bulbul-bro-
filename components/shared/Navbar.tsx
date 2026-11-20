@@ -30,7 +30,6 @@ export function Nav() {
     useEffect(() => {
         const fetchUser = async () => {
             const userData = await getCurrentUser();
-            console.log("Current user response:", userData);
             setUser(userData || null);
 
         }
@@ -93,7 +92,7 @@ export function Nav() {
                 <NavbarLink href="/" active>
                     Home
                 </NavbarLink>
-                <NavbarLink href="/products">
+                <NavbarLink href="/product">
                     Products
                 </NavbarLink>
                 <NavbarLink href="/about">

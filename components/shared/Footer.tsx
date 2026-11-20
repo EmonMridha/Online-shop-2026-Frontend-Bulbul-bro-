@@ -52,7 +52,6 @@ const socials = [
 ];
 
 export default function Footer() {
-    const year = new Date().getFullYear();
 
     return (
         <footer className="border-t border-gray-100 bg-white">
@@ -62,7 +61,7 @@ export default function Footer() {
                     {/* Brand */}
                     <div className="lg:col-span-2">
                         <Link href="/" className="text-xl font-bold tracking-tight text-gray-900">
-                            YourBrand
+                            Bulbul Bhai Shop
                         </Link>
                         <p className="mt-4 max-w-xs text-sm leading-relaxed text-gray-500">
                             Thoughtfully designed essentials for everyday life. Quality you can
@@ -109,7 +108,6 @@ export default function Footer() {
                 {/* Bottom: Copyright + Payment */}
                 <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-gray-100 pt-8 sm:flex-row">
                     <p className="text-xs text-gray-500">
-                        © {year} YourBrand. All rights reserved.
                     </p>
                     <div className="flex items-center gap-4 text-xs text-gray-400">
                         <span>Visa</span>

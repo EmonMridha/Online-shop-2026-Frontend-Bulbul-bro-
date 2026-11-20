@@ -1,11 +1,9 @@
-import React from 'react'
 import HeroBanner from './_components/Banner'
 import CategoriesSection from './_components/Categories'
 import FeaturedProducts from './_components/Featured'
 import WhyChooseUs from './_components/WhyChoose'
 import HowToOrder from './_components/HowToOrder'
 import ContactSection from './_components/Contact'
-import Footer from '@/components/shared/Footer'
 
 const HomePage = () => {
     return (
@@ -15,7 +13,7 @@ const HomePage = () => {
             <FeaturedProducts />
             <WhyChooseUs />
             <HowToOrder />
-            <ContactSection/>
+            <ContactSection />
         </div>
     )
 }
