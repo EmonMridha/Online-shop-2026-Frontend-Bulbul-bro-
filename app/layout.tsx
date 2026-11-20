@@ -4,6 +4,7 @@ import { Noto_Serif, Public_Sans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Toaster } from "sonner";
 import { Nav } from "@/components/shared/Navbar";
+import Footer from "@/components/shared/Footer";
 
 const publicSansHeading = Public_Sans({ subsets: ['latin'], variable: '--font-heading' });
 
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col">
         <Nav />
         {children}
+        <Footer />
         <Toaster position="top-right"></Toaster>
       </body>
     </html>
