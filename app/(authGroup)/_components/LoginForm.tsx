@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input"
 import { useActionState, useEffect } from "react"
 import { loginAction } from "../_actions/authAction"
 import { toast } from "sonner"
+import { useRouter } from "next/navigation"
 
 const initialState = {
     success: false,
@@ -25,17 +26,19 @@ const initialState = {
 export const LoginForm = () => {
 
     const [state, action, pending] = useActionState(loginAction, initialState) // When the action will be triggered anywhere in the component, the loginAction function will start to execute. Here state will contain the result returned by the loginAction function. The pending will be true if the loginAction function is executing. Any function given in the useActionState will get previous state in the first argument and the formData in teh second argument. The formData will contain the data of the form which is submitted. The formData will be automatically passed to the function given in the useActionState when the form is submitted.
+    const router = useRouter()
 
     useEffect(() => {
         if (!state.message) return
 
         if (state.success) {
             toast.success(state.message)
+            router.push('/')
         } else {
             toast.error(state.message)
         }
 
-    }, [state])
+    }, [state, router])
     return (
         <div>
             <div className="flex min-h-screen items-center justify-center">

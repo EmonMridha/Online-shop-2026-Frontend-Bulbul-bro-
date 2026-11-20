@@ -1,4 +1,5 @@
 'use server'
+
 import { cookies } from "next/headers"
 
 type LoginState = {
@@ -6,6 +7,7 @@ type LoginState = {
     message: string
 }
 
+// any function that is called in the useActionState will have the previous state in the first argument and the form data in the second argument. The form data will contain the data of the form which is submitted. The form data will be automatically passed to the function given in the useActionState when the form is submitted.
 export const loginAction = async (prevState: LoginState, formData: FormData) => {
     try {
         const email = formData.get('email')
@@ -60,6 +62,8 @@ export const loginAction = async (prevState: LoginState, formData: FormData) => 
                 success: true,
                 message: result.message || "Login successful"
             }
+
+
         }
 
         return {
@@ -79,4 +83,26 @@ export const loginAction = async (prevState: LoginState, formData: FormData) => 
             }
         }
     }
+}
+
+export const getCurrentUser = async () => {
+    const cookieStore = await cookies()
+    const accessToken = cookieStore.get('accessToken')?.value
+    const refreshToken = cookieStore.get('refreshToken')?.value
+
+    if (!accessToken || !refreshToken) {
+        return null
+    }
+
+    const res = await fetch(`${process.env.BACKEND_URL}/api/auth/me`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${accessToken}`
+        }
+    })
+
+    const result = await res.json()
+
+    return result.data
 }

@@ -12,6 +12,7 @@
     "@remixicon/react": "^4.9.0",
     "class-variance-authority": "^0.7.1",
     "cn": "^0.5.2",
+    "flowbite-react": "^0.12.17",
     "next": "16.4.5",
     "radix-ui": "^1.8.1",
     "react": "19.3.0",

@@ -3,6 +3,7 @@ import "./globals.css";
 import { Noto_Serif, Public_Sans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Toaster } from "sonner";
+import { Nav } from "@/components/shared/Navbar";
 
 const publicSansHeading = Public_Sans({ subsets: ['latin'], variable: '--font-heading' });
 
@@ -19,7 +20,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={cn("h-full", "antialiased", "font-serif", notoSerif.variable, publicSansHeading.variable)}
     >
-      <body className="min-h-full flex flex-col">{children}
+
+      <body className="min-h-full flex flex-col">
+        <Nav />
+        {children}
         <Toaster position="top-right"></Toaster>
       </body>
     </html>

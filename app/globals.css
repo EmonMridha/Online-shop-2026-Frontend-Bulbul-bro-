@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "flowbite-react/plugin/tailwindcss";
+@source "../.flowbite-react/class-list.json";
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.148 0.004 228.8);
