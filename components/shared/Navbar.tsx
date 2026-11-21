@@ -34,7 +34,7 @@ export function Nav() {
 
         }
         fetchUser()
-    }, [user])
+    }, [])
     return (
 
         <Navbar fluid rounded>

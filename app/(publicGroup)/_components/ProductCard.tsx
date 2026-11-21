@@ -1,6 +1,7 @@
 
 import Image from "next/image";
-import { Product } from "../page";
+import { Product } from "../product/page";
+import Link from "next/link";
 
 interface ProductCardProps {
     product: Product;
@@ -12,12 +13,10 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
             {/* Product Image */}
             <div className="relative aspect-square bg-gray-100">
-                <Image
+                <img
                     src={product.imageURL}
                     alt={product.name}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover"
+                    className="h-full w-full object-cover"
                 />
             </div>
 
@@ -50,12 +49,14 @@ const ProductCard = ({ product }: ProductCardProps) => {
                         ৳{Number(product.price).toLocaleString("en-BD")}
                     </p>
 
-                    <button
-                        disabled={product.stock === 0}
-                        className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-400"
-                    >
-                        View Details
-                    </button>
+                    <Link href={`/product/${product.id}`}>
+                        <button
+                            disabled={product.stock === 0}
+                            className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-400"
+                        >
+                            View Details
+                        </button>
+                    </Link>
                 </div>
 
             </div>

@@ -12,3 +12,18 @@ export const getAllProduct = async () => {
 
     return res.json();
 };
+
+export const getSingleProduct = async (id: string) => {
+    const backendURL = process.env.NEXT_PUBLIC_BACKEND_URL; // accessing the backend url from .env
+
+    // GEtting single product for db
+    const res = await fetch(`${backendURL}/api/products/${id}`, {
+        cache: "no-store"
+    });
+
+    if (!res.ok) {
+        throw new Error("Failed to fetch single product");
+    }
+
+    return res.json();
+}
