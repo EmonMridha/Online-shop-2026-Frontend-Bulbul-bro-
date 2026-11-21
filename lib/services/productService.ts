@@ -1,8 +1,8 @@
-export const getAllProduct = async () => {
+export const getAllProduct = async (page: number, limit: number) => {
     const backendURL = process.env.NEXT_PUBLIC_BACKEND_URL; // accessing the backend url from .env
 
     // GEtting all products from the database
-    const res = await fetch(`${backendURL}/api/products`, {
+    const res = await fetch(`${backendURL}/api/products?page=${page}&limit=${limit}`, {
         cache: "no-store"
     });
 
