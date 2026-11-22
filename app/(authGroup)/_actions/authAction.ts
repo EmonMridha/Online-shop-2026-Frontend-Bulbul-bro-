@@ -104,5 +104,9 @@ export const getCurrentUser = async () => {
 
     const result = await res.json()
 
+    if(!result.success){
+        throw new Error("current user data not available")
+    }
+
     return result.data
 }
