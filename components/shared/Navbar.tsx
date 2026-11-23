@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import Link from "next/link";
 
-type User = {
+export type User = {
     id: string;
     name: string;
     email: string;

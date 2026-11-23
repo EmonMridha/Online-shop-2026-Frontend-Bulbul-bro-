@@ -1,13 +1,27 @@
 
-import Image from "next/image";
+'use client'
+import { useEffect, useState } from "react";
 import { Product } from "../product/page";
 import Link from "next/link";
+import { getCurrentUser } from "@/app/(authGroup)/_actions/authAction";
+import { User } from "@/components/shared/Navbar";
 
 interface ProductCardProps {
     product: Product;
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
+    const [user, setUser] = useState<User | null>(null);
+
+    useEffect(() => {
+        const fetchCurrentUser = async () => {
+            const res = await getCurrentUser();
+            setUser(res)
+
+        }
+        fetchCurrentUser()
+    }, [])
+
     return (
         <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
 
@@ -49,14 +63,45 @@ const ProductCard = ({ product }: ProductCardProps) => {
                         ৳{Number(product.price).toLocaleString("en-BD")}
                     </p>
 
-                    <Link href={`/product/${product.id}`}>
-                        <button
-                            disabled={product.stock === 0}
-                            className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-400"
-                        >
-                            View Details
-                        </button>
-                    </Link>
+                    {
+                        user?.role === "ADMIN" ? (
+                            <div className="flex p-2 w-full items-center gap-2">
+                                {/* View */}
+                                <Link
+                                    href={`/product/${product.id}`}
+                                    className="flex flex-1 items-center justify-center rounded-lg bg-blue-600 px-2 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
+                                    title="View Product"
+                                >
+                                    View
+                                </Link>
+
+                                {/* Edit */}
+                                <Link
+                                    href={`/adminDashboard/products/edit/${product.id}`}
+                                    className="flex flex-1 items-center justify-center rounded-lg bg-amber-500 px-2 py-2 text-sm font-medium text-white transition hover:bg-amber-600"
+                                    title="Edit Product"
+                                >
+                                    Edit
+                                </Link>
+
+                                {/* Delete */}
+                                <button
+                                    onClick={() => console.log("Delete product:", product.id)}
+                                    className="flex flex-1 items-center justify-center rounded-lg bg-red-600 px-2 py-2 text-sm font-medium text-white transition hover:bg-red-700"
+                                    title="Delete Product"
+                                >
+                                    Delete
+                                </button>
+                            </div>
+                        ) : (
+                            <Link
+                                href={`/product/${product.id}`}
+                                className="flex items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
+                            >
+                                View Details
+                            </Link>
+                        )
+                    }
                 </div>
 
             </div>
