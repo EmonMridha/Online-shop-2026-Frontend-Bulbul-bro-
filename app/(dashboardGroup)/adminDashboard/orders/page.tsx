@@ -1,9 +1,7 @@
 
 'use client'
 
-import ProductCard from "@/app/(publicGroup)/_components/ProductCard";
 import { getAllOrders } from "@/lib/services/orderService";
-import { getAllProduct } from "@/lib/services/productService"
 import { useEffect, useState } from "react"
 import OrderCard from "../_components/OrderCard";
 
@@ -11,6 +9,7 @@ export interface OrderItem {
     id: string;
     orderId: string;
     productId: string;
+    productName: string;
     quantity: number;
     price: string;
 }
@@ -29,7 +28,6 @@ export interface Order {
 
 const Orders = () => {
     const [orders, setOrders] = useState<Order[] | []>([])
-    console.log('from orders page', orders);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [loading, setLoading] = useState(true)
@@ -40,8 +38,8 @@ const Orders = () => {
         const fetchOrders = async () => {
             try {
                 const result = await getAllOrders(currentPage, limit) // getting all products
-                console.log('from orders page1', result.data.data);
                 setOrders(result.data)
+                setTotalPages(result.totalPages)
 
             } catch (error) {
                 console.error("Failed to fetch products:", error)

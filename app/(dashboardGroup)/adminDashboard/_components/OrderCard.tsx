@@ -1,6 +1,5 @@
 import { Order } from "../orders/page";
 
-
 interface OrderCardProps {
     order: Order;
 }
@@ -67,11 +66,14 @@ const OrderCard = ({ order }: OrderCardProps) => {
                     {order.items.map((item) => (
                         <div
                             key={item.id}
-                            className="flex items-center justify-between gap-3 text-sm"
+                            className="flex items-center justify-between border-2 p-2 gap-3 text-sm"
                         >
                             <div>
                                 <p className="font-medium text-gray-800">
                                     Product ID: {item.productId.slice(-8)}
+                                </p>
+                                <p className="font-medium text-gray-800">
+                                    Product Name: {item.productName}
                                 </p>
                                 <p className="text-xs text-gray-500">
                                     Quantity: {item.quantity}
