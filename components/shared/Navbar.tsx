@@ -31,7 +31,6 @@ export function Nav() {
         const fetchUser = async () => {
             const userData = await getCurrentUser();
             setUser(userData || null);
-
         }
         fetchUser()
     }, [])
@@ -95,8 +94,8 @@ export function Nav() {
                 <NavbarLink href="/product">
                     Products
                 </NavbarLink>
-                <NavbarLink href="/about">
-                    About
+                <NavbarLink href="/adminDashboard">
+                    Admin Dashboard
                 </NavbarLink>
                 <NavbarLink href="/contact">
                     Contact
